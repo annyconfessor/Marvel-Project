@@ -5,30 +5,50 @@ import { getThumbnail } from '../services/marvelApi'
 
 const Card = styled.div`
   display: flex;
-  margin: 1rem;
+  /* margin: 1rem; */
+  /* background-color: ${(props) => props.theme.colors.dark}; */
+  /* height: 100vh; */
 `
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: auto;
-  border-radius: 1rem;
-  z-index: 10;
-  background-color: ${(props) => props.theme.colors.darkRed};
-`
+  border: 2px solid rgba(7, 7, 7, 0.12);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  background-color: ${(props) => props.theme.colors.dark};
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.24);
+
+    &:hover {
+      opacity: 1;
+    }
+  `
 
 const Content = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 20rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+
+  &:hover {
+      border: 1px solid #202020;
+      border-radius: 10px;
+      box-shadow: 0px 0px 999px 999px rgba(41, 41, 41, 0.95);
+      z-index: 500;
+      opacity: 1;
+    }
 `
 
 const Figure = styled.figure`
   width: 10rem;
+  display: flex;
+  justify-content: center;
+  /* padding: 0 0.2rem; */
   
   img {
-      margin: 1rem; 
+      /* margin: 0.5rem;  */
       width: 100%;
       object-fit: contain;
       border-radius: 0.5rem;
@@ -41,45 +61,25 @@ const Texts = styled.div`
   margin: 1rem;
   
   h1 {
-    font-family: 'Playfair Display';
-    font-weight: 400;
-    font-size: 1.5rem;
+    font-family: 'helvetica';
+    font-weight: 300;
+    font-size: 1.0rem;
     color: ${(props) => props.theme.colors.white};
   }
 `
 
-interface ICharacter {
-  id: number,
-  item: any,
-  name: string,
-  thumbnail: any,
-  path: string,
-  extension: string
-}
+const CharacterCard = ({ data }: { data: any }) => {
+  const image = `${data.thumbnail.path}.${data.thumbnail.extension}`
 
-const CharacterCard = () => {
-    const [thumbnail, setThumbnail] = useState<ICharacter[]>([])
-
-    useEffect(() => {
-      (async () => {
-        const response: any = await getThumbnail()
-        const thumbnailData = response.data.results
-        setThumbnail(thumbnailData)
-      })()
-    }, [])
+    console.log('data', data)
 
     return(
       <Card className="card">
         <Wrapper className="wrapper">
           <Content className="content">
             <Figure className="figure">
-              {/* <img src={"http://i.annihil.us/u/prod/marvel/i/mg/b/70/4c0035adc7d3a.jpg"} alt="marvel-character-thumbnail" /> */}
-              {thumbnail.map(item => <img src={item.thumbnail.path + '.' + item.thumbnail.extension} alt={item.name}/>)}
+              <img src={image} alt={data.name} />
             </Figure>
-            <Texts>
-              <h1>Character</h1>
-              {/* <p>{thumbnail.map(item => item.name)}</p> */}
-            </Texts>
           </Content>
         </Wrapper>
       </Card>

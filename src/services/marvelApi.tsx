@@ -12,3 +12,5 @@ export const makeRequest = async (path: string, method: any, params?: {}) => {
 }
 
 export const getCharacters = () => makeRequest('/characters', ky.get)
+
+export const getThumbnail = () => makeRequest('/characters', ky.get)
