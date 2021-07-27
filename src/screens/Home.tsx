@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CharacterCard from '../components/CharacterCard'
+import SearchInput from '../components/SearchInput'
 import { getCharacters } from '../services/marvelApi'
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  background-color: ${(props) => props.theme.colors.dark};
+  align-items: center;
+  padding-top: 2rem;
+  background-color: ${(props) => props.theme.colors.firstGray};
   `
 
 const Content = styled.div`
@@ -45,6 +49,7 @@ function Home() {
 
   return (
     <Wrapper className="Home">
+      <SearchInput />
       <Content>
         {characters.map((item, index) => <CharacterCard key={index} data={item} />)}
       </Content>
