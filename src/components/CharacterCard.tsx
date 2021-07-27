@@ -2,10 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Card = styled.div`
-  /* display: flex; */
   margin: 1rem;
-  /* background-color: ${(props) => props.theme.colors.dark}; */
-  /* height: 100vh; */
 `
 
 const Wrapper = styled.div`
@@ -17,7 +14,7 @@ const Wrapper = styled.div`
   cursor: pointer;
   position: relative;
   background-color: ${(props) => props.theme.colors.dark};
-  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.24);
+  box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.24);
   `
 
 const Content = styled.div`
@@ -29,12 +26,10 @@ const Content = styled.div`
   opacity: 0.8;
 
   &:hover {
-      border: 1px solid #202020;
+      border: 1px;
       border-radius: 10px;
-      box-shadow: 0px 0px 999px 999px rgba(41, 41, 41, 0.95);
       z-index: 500;
       opacity: 1;
-      /* margin: 0.5rem; */
     }
 `
 
@@ -51,15 +46,14 @@ const Figure = styled.figure`
 
 const Texts = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 1rem;
-  
-  h1 {
-    font-family: 'helvetica';
-    font-weight: 300;
-    font-size: 1.0rem;
-    color: ${(props) => props.theme.colors.white};
-  }
+  font-family: 'helvetica';
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 1.0rem;
+  color: ${(props) => props.theme.colors.white};
 `
 
 const CharacterCard = ({ data }: { data: any }) => {
@@ -74,7 +68,7 @@ const CharacterCard = ({ data }: { data: any }) => {
             <Figure className="figure">
               <img src={image} alt={data.name} />
             </Figure>
-            <Texts>{data.name}</Texts>
+            <Texts className="texts">{data.name}</Texts>
           </Content>
         </Wrapper>
       </Card>
