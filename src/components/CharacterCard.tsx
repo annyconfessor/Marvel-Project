@@ -59,8 +59,6 @@ const Texts = styled.div`
 const CharacterCard = ({ data }: { data: any }) => {
   const image = `${data.thumbnail.path}.${data.thumbnail.extension}`
 
-    console.log('data', data)
-
     return(
       <Card className="card">
         <Wrapper className="wrapper">

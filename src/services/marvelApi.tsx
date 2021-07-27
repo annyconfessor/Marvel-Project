@@ -11,6 +11,4 @@ export const makeRequest = async (path: string, method: any, params?: {}) => {
     return await method(`${MARVEL_API}${path}?ts=${ts}&apikey=${publicKey}&hash=${hash}${params ? `&${qs.stringify(params)}` : ''}`).json()
 }
 
-export const getCharacters = () => makeRequest('/characters', ky.get)
-
-export const getThumbnail = () => makeRequest('/characters', ky.get)
+export const getCharacters = (params: {}) => makeRequest('/characters', ky.get, params)

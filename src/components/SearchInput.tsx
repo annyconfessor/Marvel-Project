@@ -52,9 +52,7 @@ const SearchInput: React.FC<IProps> = ({ onPress }) => {
       <Container className="searchInput-container">
           <Content>
             <input placeholder="Search" value={value} onChange={handleValue}></input>
-            <button onClick={() => {onPress(value)
-                console.log(value)
-            }}> 
+            <button onClick={() => onPress(value)}> 
                 <Icons name="lupaa"></Icons>
             </button>
           </Content>

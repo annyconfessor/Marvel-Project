@@ -30,26 +30,33 @@ interface ICharacter {
 
 }
 
-function Home() {
+const Home = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [characters, setCharacters] = useState<ICharacter[]>([])
 
-  useEffect(() => {
-    (async () => {
+  const fetchCharacters = async (name?: string) => {
+    console.log(name)
+    try {
       setLoading(true)
-      const response: any = await getCharacters()
+      const response: any = await getCharacters({ name })
       setCharacters(response.data.results)
       setLoading(false)
-    })()
+    } catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    fetchCharacters();
   }, [])
-  
+
   if (loading) return <div>Carregando....</div>
 
   if (!characters.length) return <div>Sem personagens para exibir</div>
 
   return (
     <Wrapper className="Home">
-      <SearchInput onPress={getCharacters}/>
+      <SearchInput onPress={fetchCharacters}/>
       <Content>
         {characters.map((item, index) => <CharacterCard key={index} data={item} />)}
       </Content>
