@@ -30,22 +30,33 @@ display: flex;
 justify-content: space-around;
 align-items: center;
 width: calc(100% - 5%);
+
+    button {
+        background-color: transparent;
+        border: none;
+    }
 `
 
-const SearchInput: React.FC = () => {
+interface IProps {
+  onPress: any
+}
+
+const SearchInput: React.FC<IProps> = ({ onPress }) => {
   const [value, setValue] = useState("")
 
   const handleValue = (event: any) => {
       setValue(event.target.value)
   }
 
-  console.log(value)
-
   return(
       <Container className="searchInput-container">
           <Content>
-            <Icons name="lupaa"></Icons>
             <input placeholder="Search" value={value} onChange={handleValue}></input>
+            <button onClick={() => {onPress(value)
+                console.log(value)
+            }}> 
+                <Icons name="lupaa"></Icons>
+            </button>
           </Content>
       </Container>
   )

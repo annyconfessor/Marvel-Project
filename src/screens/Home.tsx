@@ -49,7 +49,7 @@ function Home() {
 
   return (
     <Wrapper className="Home">
-      <SearchInput />
+      <SearchInput onPress={getCharacters}/>
       <Content>
         {characters.map((item, index) => <CharacterCard key={index} data={item} />)}
       </Content>
