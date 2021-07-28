@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import pixel2view from './utils/pixel2view';
 
 const GlobalStyle = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -48,6 +49,18 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+:root {
+	font-size: ${pixel2view(24)};
+
+	@media (min-width: 768px) {
+		font-size: ${pixel2view(22)};
+	}
+
+	@media (min-width: 1024px) {
+		font-size: ${pixel2view(16)};
+	}
 }
 `
 

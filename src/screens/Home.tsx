@@ -3,20 +3,46 @@ import styled from 'styled-components'
 import CharacterCard from '../components/CharacterCard'
 import SearchInput from '../components/SearchInput'
 import { getCharacters } from '../services/marvelApi'
+import pixel2view from '../utils/pixel2view'
 
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding-top: 2rem;
   background-color: ${(props) => props.theme.colors.firstGray};
-  `
+    `
 
 const Content = styled.div`
   display: grid;
   grid-template-columns: 200px 200px 200px 200px;
   column-gap: 4rem;
+
+  @media (min-width: 375px) {
+    display: grid;
+    grid-template-columns: 160px 160px;
+    min-height: ${pixel2view(300)};
+  }
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    min-height: ${pixel2view(1400, 768)};
+  }
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    min-height: ${pixel2view(300)};
+  }
+
+  @media (min-width: 1920px) {
+    display: grid;
+    grid-template-columns: 400px 400px 400px 400px;
+    min-height: ${pixel2view(300)};
+  }
+  
 `
 
 interface ICharacter {
@@ -42,7 +68,7 @@ const Home = () => {
       setCharacters(response.data.results)
       setLoading(false)
     } catch(err){
-      console.log(err)
+      throw new Error(err);
     }
   }
 
@@ -55,9 +81,9 @@ const Home = () => {
   if (!characters.length) return <div>Sem personagens para exibir</div>
 
   return (
-    <Wrapper className="Home">
+    <Wrapper className="home-wrapper">
       <SearchInput onPress={fetchCharacters}/>
-      <Content>
+      <Content className="home-content">
         {characters.map((item, index) => <CharacterCard key={index} data={item} />)}
       </Content>
     </Wrapper>
