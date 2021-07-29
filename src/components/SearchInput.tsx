@@ -9,7 +9,7 @@ width: calc(100% - 40%);
 height: 48px;
 border-radius: 20px;
 background-color: #FDFCFC;
-margin: 10px 0;
+margin: 3rem 0;
 
 input {
         width: calc(100% - 10%);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CharacterCard from '../components/CharacterCard'
+import Header from '../components/Header'
 import SearchInput from '../components/SearchInput'
 import { getCharacters } from '../services/marvelApi'
 import pixel2view from '../utils/pixel2view'
@@ -10,7 +11,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2rem;
   background-color: ${(props) => props.theme.colors.firstGray};
     `
 
@@ -82,6 +82,7 @@ const Home = () => {
 
   return (
     <Wrapper className="home-wrapper">
+      <Header />
       <SearchInput onPress={fetchCharacters}/>
       <Content className="home-content">
         {characters.map((item, index) => <CharacterCard key={index} data={item} />)}
