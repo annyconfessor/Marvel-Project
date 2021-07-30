@@ -1,21 +1,18 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-
-const Card = styled.div`
-  margin: 1rem;
-`
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: auto;
+  margin: 1rem;
   border: 2px solid rgba(7, 7, 7, 0.12);
   border-radius: 10px;
   cursor: pointer;
   position: relative;
   background-color: ${(props) => props.theme.colors.dark};
   box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.24);
-  `
+`
 
 const Content = styled.div`
   display: flex;
@@ -57,20 +54,23 @@ const Texts = styled.div`
 `
 
 const CharacterCard = ({ data }: { data: any }) => {
+  const history = useHistory()
   const image = `${data.thumbnail.path}.${data.thumbnail.extension}`
 
-    return(
-      <Card className="card">
-        <Wrapper className="wrapper">
-          <Content className="content">
-            <Figure className="figure">
-              <img src={image} alt={data.name} />
-            </Figure>
-            <Texts className="texts">{data.name}</Texts>
-          </Content>
-        </Wrapper>
-      </Card>
-    )
+  const onPress = () => {
+    history.push(`/details/${data.id}`, { data })
+  }
+
+  return (
+    <Wrapper className="wrapper">
+      <Content className="content" onClick={onPress}>
+        <Figure className="figure">
+          <img src={image} alt={data.name} />
+        </Figure>
+        <Texts className="texts">{data.name}</Texts>
+      </Content>
+    </Wrapper>
+  )
 }
 
 export default CharacterCard
